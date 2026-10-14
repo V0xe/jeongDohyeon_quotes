@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0c" />
+    <meta name="description" content="정도현의 어록을 수집·검색·보존하고 공유하는 비공식 아카이브." />
+    <title>정도현의 어록 — Glass Archive</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="wrap topbar">
+      <a class="brand" href="#top" aria-label="정도현의 어록 홈">
+        <span class="brand-mark">D</span>
+        <span>J.D.H. ARCHIVE</span>
+      </a>
+      <div class="top-note">Unofficial archive · v2.1</div>
+      <div class="top-actions">
+        <button class="btn ghost only-desktop" id="backupTop" type="button">백업 / 복원</button>
+        <span class="tag readonly-badge" aria-label="읽기 전용 아카이브">READ-ONLY ARCHIVE</span>
+      </div>
+    </header>
+
+    <section class="wrap hero glass" id="top">
+      <div class="eyebrow">The words of Jeong Dohyeon</div>
+      <h1>정도현의<br /><span>어록.</span></h1>
+      <p class="hero-copy">
+        무심코 던진 한마디가 역사가 되는 순간.<br />
+        <strong>기억은 흐려져도, 캡처는 남는다.</strong>
+      </p>
+      <div class="hero-bottom">
+        <div class="stats">
+          <div class="stat"><strong id="heroCount">04</strong><span>Archived quotes</span></div>
+          <div class="stat"><strong id="heroFavorite">00</strong><span>My favorites</span></div>
+          <div class="stat"><strong id="heroVisit">00</strong><span>Recorded views</span></div>
+        </div>
+        <div class="hero-buttons">
+          <a class="btn primary" href="#archive">어록 열람하기 ↘</a>
+          <button class="btn" id="dailyBtn" type="button">오늘의 한마디 ◇</button>
+          <button class="btn" id="randomBtn" type="button">랜덤 어록 ⤨</button>
+    <main class="wrap">
+      <section id="archive">
+        <div class="section-head">
+          <div>
+            <div class="kicker">The archive / all records</div>
+            <h2>말씀을 기록하다.</h2>
+          </div>
+          <div class="small-note">공식 기록은 읽기 전용으로 보존됩니다. 검색과 열람 기능을 이용해 보세요.</div>
+        </div>
+        
+        <div class="tools-panel glass">
+          <div class="tools">
+            <label class="searchbox">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7" />
+                <path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+              </svg>
+              <input class="field" id="search" type="search" placeholder="어록 · 태그 · 시간 검색…" aria-label="어록 검색" autocomplete="off" />
+            </label>
+            <select class="select" id="tagFilter" aria-label="태그 필터">
+              <option value="">모든 태그</option>
+            </select>
+            <select class="select" id="sortBy" aria-label="정렬">
+              <option value="new">최근 등록순</option>
+              <option value="old">오래된 등록순</option>
+              <option value="alpha">가나다순</option>
+              <option value="views">최근 본 순</option>
+            </select>
+          </div>
+
+          <div class="filter-row" id="filterRow">
+            <button class="pill active" data-filter="all" aria-pressed="true">전체</button>
+            <button class="pill" data-filter="favorites" aria-pressed="false">☆ 즐겨찾기</button>
+            <button class="pill" data-filter="recent" aria-pressed="false">◷ 최근 본</button>
+            <button class="pill" data-filter="images" aria-pressed="false">▧ 사진 있음</button>
+            <button class="pill" data-filter="today" aria-pressed="false">오늘 등록</button>
+            <div class="date-filter">
+              <span>등록일</span>
+              <input class="field" id="dateFrom" type="date" aria-label="등록 시작일" />
+              <span>—</span>
+              <input class="field" id="dateTo" type="date" aria-label="등록 종료일" />
+            </div>
+          </div>
+        </div>
+
+      <section class="content-grid" id="insights">
+        <article class="panel glass">
+          <div class="kicker">Daily selection</div>
+          <div class="daily-card">
+            <div>
+              <h3>오늘의 한마디</h3>
+              <div class="daily-quote" id="dailyText">기록을 불러오는 중…</div>
+              <div class="daily-meta" id="dailyMeta"></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:15px">
+                <button class="btn primary small" id="dailyOpen" type="button">어록 열기 ↗</button>
+                <button class="btn small" id="dailyCopy" type="button">문구 복사</button>
+              </div>
+            </div>
+            <div class="dice" aria-hidden="true">◇</div>
+          </div>
+        </article>
+
+        <article class="panel glass">
+          <div class="kicker">Local archive analytics</div>
+          <h3>아카이브 통계</h3>
+          <div class="stat-grid" id="statGrid"></div>
+          <div class="tag-chart" id="tagChart"></div>
+        </article>
+
+        <article class="panel glass" id="recentPanel">
+          <div class="kicker">Browsing history</div>
+          <h3>최근 본 어록</h3>
+          <div class="recent-list" id="recentList"></div>
+        </article>
+
+        <article class="panel glass" id="collectionsPanel">
+          <div class="kicker">PERSONAL SHORTLIST</div>
+          <h3>즐겨찾기 보관함</h3>
+          <div id="collectionOverview" class="recent-list"></div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn small" id="backupBottom" type="button">백업 / 복원</button>
+            <button class="btn small" id="exportBtn" type="button">내 이용 기록 백업 ↓</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="manifesto glass">
+    <dialog id="detailDialog">
+      <div class="dialog-head">
+        <div>
+          <h2 id="detailHeading">어록 상세</h2>
+          <p id="detailSub"></p>
+        </div>
+        <button class="icon-btn" data-close="detailDialog" aria-label="닫기">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="detail-text" id="detailText"></div>
+        <div id="detailTags" class="card-tags"></div>
+        <img id="detailImage" class="detail-image" alt="원본 캡처 확대 보기" hidden />
+        <p class="help" id="detailNoImage" hidden>등록된 원본 캡처가 없습니다.</p>
+        <div class="detail-actions">
+          <button class="btn primary" id="detailCopy" type="button">문구 복사</button>
+          <button class="btn" id="detailFavorite" type="button">☆ 즐겨찾기</button>
+          <button class="btn" id="detailShare" type="button">공유하기</button>
+          <button class="btn" id="detailMakeCard" type="button">이미지 카드 저장</button>
+          <button class="btn" id="detailDownloadImage" type="button">원본 캡처 저장</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="backupDialog">
+      <div class="dialog-head">
+        <div>
+          <h2>백업 및 복원</h2>
+          <p>즐겨찾기와 개인 열람 기록만 백업합니다. 공식 어록 데이터는 변경되지 않습니다.</p>
+        </div>
+        <button class="icon-btn" data-close="backupDialog" aria-label="닫기">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="glass" style="padding:16px;border-radius:18px">
+          <strong style="font-size:13px">JSON 백업 내보내기</strong>
+          <p class="help">즐겨찾기와 최근 본 기록만 포함한 개인 설정 백업 파일을 만듭니다. 어록과 원본 사진은 포함되지 않습니다.</p>
+          <button class="btn primary" id="backupDownload" type="button">개인 설정 백업 다운로드 ↓</button>
+        </div>
+        <div class="glass" style="padding:16px;border-radius:18px;margin-top:12px">
+          <strong style="font-size:13px">개인 설정 복원</strong>
+          <p class="help">즐겨찾기와 열람 기록만 복원합니다. 가져온 파일에 다른 어록이 들어 있어도 공식 아카이브의 문구와 사진은 추가·수정·삭제되지 않습니다.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" id="restoreReplace" type="button">설정 복원 · 교체</button>
+            <button class="btn" id="restoreMerge" type="button">설정 복원 · 병합</button>
+          </div>
+        </div>
+        <p class="help" style="margin-top:15px">즐겨찾기와 열람 기록은 현재 브라우저에 저장됩니다. 다른 기기에서는 자동 동기화되지 않으므로 필요하면 개인 설정을 백업하세요.</p>
+        <div class="dialog-foot">
+          <button class="btn ghost" data-close="backupDialog" type="button">닫기</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="imageDialog">
+      <div class="dialog-head">
+        <div>
+          <h2>원본 캡처</h2>
+          <p>원본 이미지는 보정하지 않고 표시합니다.</p>
+        </div>
+        <button class="icon-btn" data-close="imageDialog" aria-label="닫기">×</button>
+      </div>
+      <div class="dialog-body">
+        <img id="zoomImage" class="detail-image" alt="원본 캡처 이미지" style="max-height:none;cursor:default;margin-top:0" />
+        <div class="dialog-foot">
+          <button class="btn" id="zoomDownload" type="button">원본 저장 ↓</button>
+          <button class="btn primary" data-close="imageDialog" type="button">닫기</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
+
+        <div>
+          <small>ARCHIVE PRINCIPLE</small>
+          <p>“명언인지 아닌지는<br />시간이 판단할 것이다.”</p>
+        </div>
+        <div class="seal" aria-hidden="true">※</div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>© JEONG DOHYEON QUOTE ARCHIVE</span>
+      <span>비공식 읽기 전용 아카이브 · 공식 어록은 관리자가 갱신합니다.</span>
+      <span><kbd class="kbd">/</kbd> 검색 <kbd class="kbd">R</kbd> 랜덤 <kbd class="kbd">Esc</kbd> 닫기</span>
+    </footer>
+    <div class="safe-bottom"></div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <input type="file" id="importFile" hidden accept="application/json,.json" aria-label="백업 JSON 파일" />
+
+        <div class="results-line">
+          <span>ARCHIVE <strong id="collectionLabel">ALL RECORDS</strong></span>
+          <span id="resultCount">04개의 기록</span>
+        </div>
+
+        <section class="quote-grid" id="quoteGrid" aria-live="polite"></section>
+      </section>
+
+        </div>
+      </div>
+    </section>
